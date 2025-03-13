@@ -1,0 +1,884 @@
+version: 1
+
+models:
+    - name: metric_efarm_cultivation_aquaculture
+      meta:
+          owner: "ibra.aryani@efishery.com" 
+      config:
+        contract: {enforced: true}
+        tags: ["cultivation", "efarm", "three_times"]
+        materialized: "table"
+        full_refresh: true
+      description: Tabel yang berisi informasi cultivation dari data aquaculture process berdasarkan rentan periode tanggal dan cycle tertentu
+      columns:
+        - name: efarm_cultivation_aquaculture_id
+          data_type: string
+          description: "[PRIMARY_KEY] Unique identifier table berdasarkan record dalam satuan cycle_uuid di rentan period tanggal tertentu"
+
+        - name: cycle_uuid
+          data_type: string
+          description: ID yang digunakan untuk tiap siklus  key)
+
+        - name: contributors
+          data_type: string
+          description: DTC yang melakukan pencatatan aksi budidaya farmer
+
+        - name: appsource
+          data_type: string
+          description: Aplikasi yang mencatat record cultivation
+
+        - name: data_collection_method
+          data_type: string
+          description: metode dalam pengambilan data budidaya
+
+        - name: period_date
+          data_type: date
+          description: Tanggal aksi budidaya dilakukan
+
+        - name: pond_uuid
+          data_type: string
+          description: ID yang digunakan untuk tiap kolam  key)
+
+        - name: farm_uuid
+          data_type: string
+          description: ID yang digunakan untuk tiap tambak  key)
+
+        - name: feed_brand_farm_surveys
+          data_type: string
+          description: jenis pakan yang digunakan tambak berdasarkan survei tim DTC
+
+        - name: lead_id
+          data_type: string
+          description: ID yang digunakan untuk tiap user yang melakukan budidaya  key)
+
+        - name: pond_name
+          data_type: string
+          description: nama kolam budidaya
+
+        - name: fish_type
+          data_type: string
+          description: jenis komoditas budidaya  udang vaname, dan lainnya) berdasarkan tabel ponds
+
+        - name: pond_type
+          data_type: string
+          description: jenis kolam budidaya  tanah, HDPE, KJA dan lainnya)
+
+        - name: pond_shape
+          data_type: string
+          description: bentuk kolam budidaya  persegi dan lainnya)
+
+        - name: large_pond
+          data_type: numeric
+          description: luas kolam budidaya
+
+        - name: commodity_type
+          data_type: string
+          description: jenis komoditas budidaya  udang vaname, dan lainnya) berdasarkan tabel cycles
+
+        - name: start_cultivation_date
+          data_type: date
+          description: tanggal awal budidaya dimulai
+
+        - name: commodity_count_init
+          data_type: integer
+          description: jumlah awal komoditas budidaya  benih)
+
+        - name: commodity_weight_init
+          data_type: numeric
+          description: berat awal komoditas budidaya  benih)
+
+        - name: total_commodity_weight
+          data_type: numeric
+          description: total berat komoditas budidaya
+
+        - name: spread_densities
+          data_type: numeric
+          description: kepadatan tebar benih budidaya
+
+        - name: feeding_type_category
+          data_type: string
+          description: kategori pemberian pakan  Index dan lainnya)
+
+        - name: feed_size
+          data_type: numeric
+          description: ukuran pakan yang digunakan
+
+        - name: feed_weight
+          data_type: numeric
+          description: berat pakan yang digunakan
+
+        - name: feeding_type_value
+          data_type: numeric
+          description: nilai pemberian pakan berdasarkan kategori pemberian pakan
+
+        - name: cumulative_feed_weight
+          data_type: numeric
+          description: kumulatif berat pakan yang digunakan
+
+        - name: total_pakan
+          data_type: numeric
+          description: total pakan yang digunakan
+
+        - name: feed_name_combination
+          data_type: string
+          description: berat rata-rata komoditas berdasarkan sampling yang dilakukan
+
+        - name: mbw_samplings
+          data_type: numeric
+          description: berat rata-rata komoditas berdasarkan sampling yang dilakukan
+
+        - name: length_samplings
+          data_type: numeric
+          description: panjang rata-rata komoditas berdasarkan sampling yang dilakukan
+
+        - name: fr_samplings
+          data_type: numeric
+          description: persentase pemberian pakan berdasarkan MBW sampling
+
+        - name: is_healthy
+          data_type: boolean
+          description: kondisi komoditas sedang sehat atau tidak
+
+        - name: commodity_gills
+          data_type: string
+          description: kondisi insang komoditas berdasarkan sampling yang dilakukan
+
+        - name: commodity_swim_legs
+          data_type: string
+          description: kondisi kaki renang komoditas berdasarkan sampling yang dilakukan
+
+        - name: commodity_intestine_colour
+          data_type: string
+          description: warna usus komoditas berdasarkan sampling yang dilakukan
+
+        - name: commodity_tail
+          data_type: string
+          description: kondisi ekor komoditas berdasarkan sampling yang dilakukan
+
+        - name: commodity_hepato
+          data_type: string
+          description: kondisi hepato komoditas berdasarkan sampling yang dilakukan
+
+        - name: commodity_colour
+          data_type: string
+          description: warna komoditas berdasarkan sampling yang dilakukan
+
+        - name: commodity_shell
+          data_type: string
+          description: kondisi cangkang komoditas berdasarkan sampling yang dilakukan
+
+        - name: commodity_flesh
+          data_type: string
+          description: kondisi daging komoditas berdasarkan sampling yang dilakukan
+
+        - name: is_diseased
+          data_type: boolean
+          description: kondisi komoditas sedang memiliki penyakit atau tidak
+
+        - name: disease_samplings
+          data_type: string
+          description: penyakit yang diderita komoditas berdasarkan sampling yang dilakukan
+
+        - name: ratio_green_algae
+          data_type: numeric
+          description: nilai rasio dari alga hijau
+
+        - name: ratio_blue_green_algae
+          data_type: numeric
+          description: nilai rasio dari alga hijau biru
+
+        - name: ratio_golden_green_algae
+          data_type: numeric
+          description: nilai rasio dari alga hijau emas
+
+        - name: ratio_diatom
+          data_type: numeric
+          description: nilai rasio dari diatom  besar alga)
+
+        - name: ratio_euglenophyta
+          data_type: numeric
+          description: nilai rasio dari euglena  bersel satu)
+
+        - name: ratio_dinoflagelata
+          data_type: numeric
+          description: nilai rasio dari dinoflagelata  besar fitoplankton perairan berflagella)
+
+        - name: ratio_protozoa_zooplankton
+          data_type: numeric
+          description: nilai rasio dari zooplankton  kecil yang termasuk protozoa kecil dan metazoa besar)
+
+        - name: total_plankton
+          data_type: numeric
+          description: total keseluruhan plankton yang terdapat pada kolam
+
+        - name: is_total_harvest
+          data_type: boolean
+          description: panen yang dilakukan adalah panen semua total atau parsial
+
+        - name: emergency_reasons
+          data_type: ARRAY<STRING>
+          description: kategori alasan panen darurat
+
+        - name: emergency_causes
+          data_type: string
+          description: sebab panen darurat
+
+        - name: commodity_per_kg
+          data_type: numeric
+          description: jumlah komoditas  per kilogram
+
+        - name: harvest_weight
+          data_type: numeric
+          description: berat keseluruhan panen
+
+        - name: price_per_kg
+          data_type: numeric
+          description: harga hasil panen per kilogram
+
+        - name: dead_commodities
+          data_type: numeric
+          description: jumlah komoditas yang mati
+
+        - name: dead_commodities_weight
+          data_type: numeric
+          description: berat total komoditas yang mati
+
+        - name: mbw_diseases
+          data_type: numeric
+          description: berat rata-rata komoditas yang memiliki penyakit
+
+        - name: is_disposed
+          data_type: boolean
+          description: komoditas yang mati dibuang atau tidak
+
+        - name: disease
+          data_type: string
+          description: penyakit yang menyebab kematian
+
+        - name: physical_symptoms
+          data_type: ARRAY<STRING>
+          description: ciri-ciri gejala fisik
+
+        - name: bacteria
+          data_type: numeric
+          description: total bakteri yang terdapat pada kolam
+
+        - name: vibrio
+          data_type: numeric
+          description: total bakteri vibrio yang terdapat pada kolam
+
+        - name: vibrio_yellow
+          data_type: numeric
+          description: total bakteri vibrio kuning yang terdapat pada kolam
+
+        - name: vibrio_green
+          data_type: numeric
+          description: total bakteri vibrio hijau yang terdapat pada kolam
+
+        - name: vibrio_luminance
+          data_type: numeric
+          description: total bakteri vibrio luminance yang terdapat pada kolam
+
+        - name: vibrio_black
+          data_type: numeric
+          description: total bakteri vibrio hitam yang terdapat pada kolam
+
+        - name: weather
+          data_type: string
+          description: cuaca yang terjadi di keseluruhan waktu  siang, sore, malam)
+
+        - name: water_colour
+          data_type: string
+          description: warna air kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: tan_all
+          data_type: numeric
+          description: total amonia nitrogen yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: tom_all
+          data_type: numeric
+          description: total organic matters yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: tss_all
+          data_type: numeric
+          description: total suspended solid yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: ci_all
+          data_type: numeric
+          description: total klorin yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: orp_all
+          data_type: numeric
+          description: oxidation reduction potential yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: no2_all
+          data_type: numeric
+          description: total nitrogen dioksida yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: no3_all
+          data_type: numeric
+          description: total nitrat yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: water_hardness_all
+          data_type: numeric
+          description: tingkat kesadahan air yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: nh3_all
+          data_type: numeric
+          description: total amonia yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: nh4_all
+          data_type: numeric
+          description: total ammonium yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: fe_all
+          data_type: numeric
+          description: total zat besi yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: po4_all
+          data_type: numeric
+          description: total fosfat yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: ca_all
+          data_type: numeric
+          description: total kalsium yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: mg_all
+          data_type: numeric
+          description: total magnesium yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: co3_all
+          data_type: numeric
+          description: total karbon dioksida yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: hco3_all
+          data_type: numeric
+          description: total bikarbonat yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: alkalinity_total_all
+          data_type: numeric
+          description: total alkalinitas yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: brightness_all
+          data_type: numeric
+          description: total amonia nitrogen yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: cod_all
+          data_type: numeric
+          description: total chemical oxygen demand yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: temperature_all
+          data_type: numeric
+          description: suhu yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: ph_all
+          data_type: numeric
+          description: ph yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: value_do_all
+          data_type: numeric
+          description: nilai disolved oxygen yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: kincir_all
+          data_type: numeric
+          description: jumlah kincir yang aktif pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: water_height_all
+          data_type: numeric
+          description: kedalaman kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: tds_all
+          data_type: numeric
+          description: total disolved solid yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: water_clarity_all
+          data_type: numeric
+          description: tingkat kejernihan air yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: salinity
+          data_type: numeric
+          description: tingkat salinitas  air yang terdapat pada kolam di keseluruhan waktu  siang, sore, malam)
+
+        - name: weather_pagi
+          data_type: string
+          description: cuaca yang terjadi di waktu pagi
+
+        - name: water_colour_pagi
+          data_type: string
+          description: warna air kolam di waktu pagi
+
+        - name: tan_pagi
+          data_type: numeric
+          description: total amonia nitrogen yang terdapat pada kolam di waktu pagi
+
+        - name: tom_pagi
+          data_type: numeric
+          description: total organic matters yang terdapat pada kolam di waktu pagi
+
+        - name: tss_pagi
+          data_type: numeric
+          description: total suspended solid yang terdapat pada kolam di waktu pagi
+
+        - name: ci_pagi
+          data_type: numeric
+          description: total klorin yang terdapat pada kolam di waktu pagi
+
+        - name: orp_pagi
+          data_type: numeric
+          description: oxidation reduction potential yang terdapat pada kolam di waktu pagi
+
+        - name: no2_pagi
+          data_type: numeric
+          description: total nitrogen dioksida yang terdapat pada kolam di waktu pagi
+
+        - name: no3_pagi
+          data_type: numeric
+          description: total nitrat yang terdapat pada kolam di waktu pagi
+
+        - name: water_hardness_pagi
+          data_type: numeric
+          description: tingkat kesadahan air yang terdapat pada kolam di waktu pagi
+
+        - name: nh3_pagi
+          data_type: numeric
+          description: total amonia yang terdapat pada kolam di waktu pagi
+
+        - name: nh4_pagi
+          data_type: numeric
+          description: total ammonium yang terdapat pada kolam di waktu pagi
+
+        - name: fe_pagi
+          data_type: numeric
+          description: total zat besi yang terdapat pada kolam di waktu pagi
+
+        - name: po4_pagi
+          data_type: numeric
+          description: total fosfat yang terdapat pada kolam di waktu pagi
+
+        - name: ca_pagi
+          data_type: numeric
+          description: total kalsium yang terdapat pada kolam di waktu pagi
+
+        - name: mg_pagi
+          data_type: numeric
+          description: total magnesium yang terdapat pada kolam di waktu pagi
+
+        - name: co3_pagi
+          data_type: numeric
+          description: total karbon dioksida yang terdapat pada kolam di waktu pagi
+
+        - name: hco3_pagi
+          data_type: numeric
+          description: total bikarbonat yang terdapat pada kolam di waktu pagi
+
+        - name: alkalinity_total_pagi
+          data_type: numeric
+          description: total alkalinitas yang terdapat pada kolam di waktu pagi
+
+        - name: brightness_pagi
+          data_type: numeric
+          description: total amonia nitrogen yang terdapat pada kolam di waktu pagi
+
+        - name: cod_pagi
+          data_type: numeric
+          description: total chemical oxygen demand yang terdapat pada kolam di waktu pagi
+
+        - name: temperature_pagi
+          data_type: numeric
+          description: suhu yang terdapat pada kolam di waktu pagi
+
+        - name: ph_pagi
+          data_type: numeric
+          description: ph yang terdapat pada kolam di waktu pagi
+
+        - name: value_do_pagi
+          data_type: numeric
+          description: nilai disolved oxygen yang terdapat pada kolam di waktu pagi
+
+        - name: kincir_pagi
+          data_type: numeric
+          description: jumlah kincir yang aktif pada kolam di waktu pagi
+
+        - name: water_height_pagi
+          data_type: numeric
+          description: kedalaman kolam di waktu pagi
+
+        - name: tds_pagi
+          data_type: numeric
+          description: total disolved solid yang terdapat pada kolam di waktu pagi
+
+        - name: water_clarity_pagi
+          data_type: numeric
+          description: tingkat kejernihan air yang terdapat pada kolam di waktu pagi
+
+        - name: salinity_pagi
+          data_type: numeric
+          description: tingkat salinitas  air yang terdapat pada kolam di waktu pagi
+
+        - name: weather_sore
+          data_type: string
+          description: cuaca yang terjadi di waktu sore
+
+        - name: water_colour_sore
+          data_type: string
+          description: warna air kolam di waktu sore
+
+        - name: tan_sore
+          data_type: numeric
+          description: total amonia nitrogen yang terdapat pada kolam di waktu sore
+
+        - name: tom_sore
+          data_type: numeric
+          description: total organic matters yang terdapat pada kolam di waktu sore
+
+        - name: tss_sore
+          data_type: numeric
+          description: total suspended solid yang terdapat pada kolam di waktu sore
+
+        - name: ci_sore
+          data_type: numeric
+          description: total klorin yang terdapat pada kolam di waktu sore
+
+        - name: orp_sore
+          data_type: numeric
+          description: oxidation reduction potential yang terdapat pada kolam di waktu sore
+
+        - name: no2_sore
+          data_type: numeric
+          description: total nitrogen dioksida yang terdapat pada kolam di waktu sore
+
+        - name: no3_sore
+          data_type: numeric
+          description: total nitrat yang terdapat pada kolam di waktu sore
+
+        - name: water_hardness_sore
+          data_type: numeric
+          description: tingkat kesadahan air yang terdapat pada kolam di waktu sore
+
+        - name: nh3_sore
+          data_type: numeric
+          description: total amonia yang terdapat pada kolam di waktu sore
+
+        - name: nh4_sore
+          data_type: numeric
+          description: total ammonium yang terdapat pada kolam di waktu sore
+
+        - name: fe_sore
+          data_type: numeric
+          description: total zat besi yang terdapat pada kolam di waktu sore
+
+        - name: po4_sore
+          data_type: numeric
+          description: total fosfat yang terdapat pada kolam di waktu sore
+
+        - name: ca_sore
+          data_type: numeric
+          description: total kalsium yang terdapat pada kolam di waktu sore
+
+        - name: mg_sore
+          data_type: numeric
+          description: total magnesium yang terdapat pada kolam di waktu sore
+
+        - name: co3_sore
+          data_type: numeric
+          description: total karbon dioksida yang terdapat pada kolam di waktu sore
+
+        - name: hco3_sore
+          data_type: numeric
+          description: total bikarbonat yang terdapat pada kolam di waktu sore
+
+        - name: alkalinity_total_sore
+          data_type: numeric
+          description: total alkalinitas yang terdapat pada kolam di waktu sore
+
+        - name: brightness_sore
+          data_type: numeric
+          description: total amonia nitrogen yang terdapat pada kolam di waktu sore
+
+        - name: cod_sore
+          data_type: numeric
+          description: total chemical oxygen demand yang terdapat pada kolam di waktu sore
+
+        - name: temperature_sore
+          data_type: numeric
+          description: suhu yang terdapat pada kolam di waktu sore
+
+        - name: ph_sore
+          data_type: numeric
+          description: ph yang terdapat pada kolam di waktu sore
+
+        - name: value_do_sore
+          data_type: numeric
+          description: nilai disolved oxygen yang terdapat pada kolam di waktu sore
+
+        - name: kincir_sore
+          data_type: numeric
+          description: jumlah kincir yang aktif pada kolam di waktu sore
+
+        - name: water_height_sore
+          data_type: numeric
+          description: kedalaman kolam di waktu sore
+
+        - name: tds_sore
+          data_type: numeric
+          description: total disolved solid yang terdapat pada kolam di waktu sore
+
+        - name: water_clarity_sore
+          data_type: numeric
+          description: tingkat kejernihan air yang terdapat pada kolam di waktu sore
+
+        - name: salinity_sore
+          data_type: numeric
+          description: tingkat salinitas  air yang terdapat pada kolam di waktu sore
+
+        - name: weather_malam
+          data_type: string
+          description: cuaca yang terjadi di waktu malam
+
+        - name: water_colour_malam
+          data_type: string
+          description: warna air kolam di waktu malam
+
+        - name: tan_malam
+          data_type: numeric
+          description: total amonia nitrogen yang terdapat pada kolam di waktu malam
+
+        - name: tom_malam
+          data_type: numeric
+          description: total organic matters yang terdapat pada kolam di waktu malam
+
+        - name: tss_malam
+          data_type: numeric
+          description: total suspended solid yang terdapat pada kolam di waktu malam
+
+        - name: ci_malam
+          data_type: numeric
+          description: total klorin yang terdapat pada kolam di waktu malam
+
+        - name: orp_malam
+          data_type: numeric
+          description: oxidation reduction potential yang terdapat pada kolam di waktu malam
+
+        - name: no2_malam
+          data_type: numeric
+          description: total nitrogen dioksida yang terdapat pada kolam di waktu malam
+
+        - name: no3_malam
+          data_type: numeric
+          description: total nitrat yang terdapat pada kolam di waktu malam
+
+        - name: water_hardness_malam
+          data_type: numeric
+          description: tingkat kesadahan air yang terdapat pada kolam di waktu malam
+
+        - name: nh3_malam
+          data_type: numeric
+          description: total amonia yang terdapat pada kolam di waktu malam
+
+        - name: nh4_malam
+          data_type: numeric
+          description: total ammonium yang terdapat pada kolam di waktu malam
+
+        - name: fe_malam
+          data_type: numeric
+          description: total zat besi yang terdapat pada kolam di waktu malam
+
+        - name: po4_malam
+          data_type: numeric
+          description: total fosfat yang terdapat pada kolam di waktu malam
+
+        - name: ca_malam
+          data_type: numeric
+          description: total kalsium yang terdapat pada kolam di waktu malam
+
+        - name: mg_malam
+          data_type: numeric
+          description: total magnesium yang terdapat pada kolam di waktu malam
+
+        - name: co3_malam
+          data_type: numeric
+          description: total karbon dioksida yang terdapat pada kolam di waktu malam
+
+        - name: hco3_malam
+          data_type: numeric
+          description: total bikarbonat yang terdapat pada kolam di waktu malam
+
+        - name: alkalinity_total_malam
+          data_type: numeric
+          description: total alkalinitas yang terdapat pada kolam di waktu malam
+
+        - name: brightness_malam
+          data_type: numeric
+          description: total amonia nitrogen yang terdapat pada kolam di waktu malam
+
+        - name: cod_malam
+          data_type: numeric
+          description: total chemical oxygen demand yang terdapat pada kolam di waktu malam
+
+        - name: temperature_malam
+          data_type: numeric
+          description: suhu yang terdapat pada kolam di waktu malam
+
+        - name: ph_malam
+          data_type: numeric
+          description: ph yang terdapat pada kolam di waktu malam
+
+        - name: value_do_malam
+          data_type: numeric
+          description: nilai disolved oxygen yang terdapat pada kolam di waktu malam
+
+        - name: kincir_malam
+          data_type: numeric
+          description: jumlah kincir yang aktif pada kolam di waktu malam
+
+        - name: water_height_malam
+          data_type: numeric
+          description: kedalaman kolam di waktu malam
+
+        - name: tds_malam
+          data_type: numeric
+          description: total disolved solid yang terdapat pada kolam di waktu malam
+
+        - name: water_clarity_malam
+          data_type: numeric
+          description: tingkat kejernihan air yang terdapat pada kolam di waktu malam
+
+        - name: salinity_malam
+          data_type: numeric
+          description: tingkat salinitas  air yang terdapat pada kolam di waktu malam
+
+        - name: is_siphon
+          data_type: string
+          description: kategori kondisi air terdapat siphon pada kolam
+
+        - name: is_over_probiotik
+          data_type: string
+          description: kategori kondisi air terdapat over probiotik pada kolam
+
+        - name: is_over_feed
+          data_type: string
+          description: kategori kondisi air terdapat over feed pada kolam
+
+        - name: is_water_circulated
+          data_type: string
+          description: kategori kondisi air terdapat water circulated pada kolam
+
+        - name: season
+          data_type: string
+          description: kategori season pada kondisi air kolam
+
+        - name: is_climatophera
+          data_type: string
+          description: kategori climatophera kondisi usus
+
+        - name: intestines_tissue_color
+          data_type: string
+          description: kategori warna jaringan intestines kondisi usus
+
+        - name: lipid_condition
+          data_type: string
+          description: kategori kondisi lipid hepatopankreas
+
+        - name: tubules_condition
+          data_type: string
+          description: kategori kondisi tubules hepatopankreas
+
+        - name: is_necrosis
+          data_type: string
+          description: kategori kondisi necrosis pada hepatopankreas
+
+        - name: is_ehp
+          data_type: string
+          description: kategori kondisi EHP pada hepatopankreas
+
+        - name: doc_
+          data_type: int
+          description: hari-ke budidaya dari komoditas
+
+        - name: total_pakan_daily
+          data_type: numeric
+          description: total pakan yang diberikan per hari
+
+        - name: abw_harvest
+          data_type: numeric
+          description: berat rata-rata komoditas panen
+
+        - name: population_harvest
+          data_type: numeric
+          description: jumlah populasi komoditas yang dipanen
+
+        - name: size_samplings
+          data_type: numeric
+          description: ukuran komoditas yang didapatkan berdasarkan sampling
+
+        - name: adg_cumulative_samplings
+          data_type: numeric
+          description: kumulatif rata-rata pertumbuhan harian berdasarkan sampling
+
+        - name: biomass_samplings
+          data_type: numeric
+          description: berat total komoditas berdasarkan sampling
+
+        - name: fcr
+          data_type: numeric
+          description: efisiensi pemberian pakan berdasarkan jumlah pakan yang diberikan dimakan atau tidak
+
+        - name: population_samplings
+          data_type: numeric
+          description: jumlah populasi berdasarkan sampling
+
+        - name: sr_samplings
+          data_type: numeric
+          description: persentase perbandingan jumlah komoditas yang dipanen dengan jumlah awal budidaya
+
+        - name: harvest_weight_bs
+          data_type: numeric
+          description: berat rata-rata komoditas yang bs ketika panen
+
+        - name: harvest_weight_fresh_1
+          data_type: numeric
+          description: berat rata-rata komoditas yang fresh kategori 1 ketika panen
+
+        - name: harvest_weight_fresh_2
+          data_type: numeric
+          description: berat rata-rata komoditas yang fresh kategori 2 ketika panen
+
+        - name: harvest_weight_fresh_3
+          data_type: numeric
+          description: berat rata-rata komoditas yang fresh kategori 3 ketika panen
+
+        - name: harvest_weight_km
+          data_type: numeric
+          description: berat rata-rata komoditas yang km ketika panen
+
+        - name: harvest_size_bs
+          data_type: numeric
+          description: ukuran rata-rata komoditas dalam sekilo yang bs ketika panen
+
+        - name: harvest_size_fresh_1
+          data_type: numeric
+          description: ukuran rata-rata komoditas dalam sekilo yang fresh kategori 1 ketika panen
+
+        - name: harvest_size_fresh_2
+          data_type: numeric
+          description: ukuran rata-rata komoditas dalam sekilo yang fresh kategori 2 ketika panen
+
+        - name: harvest_size_fresh_3
+          data_type: numeric
+          description: ukuran rata-rata komoditas dalam sekilo yang fresh kategori 3 ketika panen
+
+        - name: harvest_size_km
+          data_type: numeric
+          description: ukuran rata-rata komoditas dalam sekilo yang km ketika panen
+
+        - name: status_harvest
+          data_type: string
+          description: status penarikan ketika panen
+
+        - name: is_early_harvest
+          data_type: boolean
+          description: status penarikan ketika panen
+
+        - name: ref_sr
+          data_type: numeric
+          description: persentase jumlah komoditas yang dipanen dengan jumlah komoditas awal budidaya berdasarkan merk pakan CPP disesuaikan dengan docnya
