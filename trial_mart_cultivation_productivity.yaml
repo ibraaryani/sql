@@ -1,0 +1,132 @@
+version: 1
+
+models:
+    - name: mart_cultivation_productivity
+      meta:
+          owner: "ibra.aryani@efishery.com"
+          tableau_ds_id: 7315ec15-1424-4444-aa47-ab6823df7a7b
+      config:
+        contract: {enforced: true}
+        tags: ["cultivation", "productivity", "three_times"]
+        full_refresh: true
+      description: Tabel record cultivation productivity untuk siklus budidaya yang sudah panen total
+      columns:
+        - name: cycle_uuid
+          data_type: string
+          description: "[PRIMARY_KEY] Unique identifier table berdasarkan record dalam satuan ID yang digunakan untuk tiap siklus"
+
+        - name: start_cultivation_date
+          data_type: date
+          description: tanggal awal budidaya dimulai
+          
+        - name: harvest_total_date
+          data_type: date
+          description: tanggal panen yang diperoleh dari tanggal aksi budidaya terakhir
+          
+        - name: pond_uuid
+          data_type: string
+          description: ID yang digunakan untuk tiap kolam
+          
+        - name: pond_name
+          data_type: string
+          description: nama kolam budidaya
+          
+        - name: lead_id
+          data_type: string
+          description: ID yang digunakan untuk tiap user yang melakukan budidaya
+          
+        - name: farmer_name
+          data_type: string
+          description: nama lead yang didaftarkan via aplikasi
+          
+        - name: cultivation_type
+          data_type: string
+          description: intensitas/tingkat/sistem budidaya
+
+        - name: commodity_type
+          data_type: string
+          description: jenis komoditas budidaya 
+          
+        - name: pond_type
+          data_type: string
+          description: jenis kolam budidaya
+          
+        - name: large_pond
+          data_type: numeric
+          description: luas kolam budidaya (m2)
+          
+        - name: commodity_count_init
+          data_type: integer
+          description: jumlah awal komoditas budidaya atau total tebar benih (ekor)
+
+        - name: total_commodity_weight_init
+          data_type: numeric
+          description: total berat awal komoditas budidaya atau total berat benih (gram)
+          
+        - name: spread_densities
+          data_type: numeric
+          description: kepadatan tebar benih budidaya (ekor/m2)
+          
+        - name: cumulative_feed_weight
+          data_type: numeric
+          description: total kumulatif dari berat pakan saat panen (kilogram)
+          
+        - name: cumulative_harvest_weight
+          data_type: numeric
+          description: total kumulatif dari berat saat panen (kilogram)
+          
+        - name: cumulative_population_harvest
+          data_type: numeric
+          description: total kumulatif populasi panen (ekor)
+          
+        - name: productivity
+          data_type: numeric
+          description: total productivity dari proses cultivation (ton/ha)
+          
+        - name: sr_harvest
+          data_type: numeric
+          description: persentase jumlah komoditas yang dipanen dengan jumlah komoditas awal budidaya
+          
+        - name: ref_sr
+          data_type: numeric
+          description: persentase jumlah komoditas yang dipanen dengan jumlah komoditas awal budidaya berdasarkan merk pakan CPP (shrimp) dan referensi aquaculture scientist (fish) disesuaikan dengan docnya
+          
+        - name: fcr_harvest
+          data_type: numeric
+          description: konversi total pakan terhadap total bobot komoditas yang dihasilkan
+          
+        - name: mbw_harvest
+          data_type: numeric
+          description: berat rata-rata komoditas berdasarkan sampling yang dilakukan (gram)
+          
+        - name: status_harvest
+          data_type: string
+          description: status panen apakah normal atau emergency
+          
+        - name: subscription_cf
+          data_type: string
+          description: contract farming subscription
+          
+        - name: kabayan_type
+          data_type: string
+          description: pks type saat harvest total
+          
+        - name: tag_input_cycle
+          data_type: string
+          description: role yang melakukan inputasi siklus (TS, BD, SHWL dan Others)
+          
+        - name: area_code
+          data_type: string
+          description: area farmers
+          
+        - name: region_code
+          data_type: string
+          description: region farmers
+
+        - name: is_use_proprietary_solution 
+          data_type: boolean
+          description: flagging sudah menggunakan proper solution dari efishery
+          
+        - name: value_chain
+          data_type: string
+          description: informasi value chain berupa shrimp atau fish
